@@ -1,5 +1,7 @@
 #include"Sort.h"
 
+//#define CLASSIC_SORT_2D
+
 void Sort(int arr[], const int n)
 {
 	//Сортировка массива:
@@ -34,6 +36,7 @@ void Sort(double arr[], const int n)
 }
 void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
+#ifdef CLASSIC_SORT_2D
 	int interations = 0;
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -57,4 +60,18 @@ void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 	cout << "Массив отсортирован за " << interations << "итераций\n";
+#endif // CLASSIC_SORT_2D
+
+	for (int i = 0; i < ROWS * COLS; i++)
+	{ //Счетчик 'i' последовательно выбирает элементы массива, в которое будет помещено минимальное значение
+		for (int j = i + 1; j < ROWS * COLS; j++)
+		{
+			if (arr[0][i])
+			{
+				int buffer = arr[0][i];
+				arr[0][i] = arr[0][j];
+				arr[0][j] = buffer;
+			}
+		}
+	}
 }
